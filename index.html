@@ -24,7 +24,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="column-half">
+          <div class="column-full">
             <h1>New Entry</h1>
           </div>
         </div>
@@ -38,7 +38,31 @@
       </div>
     </header>
     <main class="container">
-      <div data-view="entry-form"></div>
+      <div data-view="entry-form">
+        <form>
+          <div class="label">
+            <label for="title">Title</label>
+          </div>
+          <div class="input">
+            <input type="text" id="title" name="title" />
+          </div>
+          <div class="label">
+            <label for="photo-URL">Photo URL</label>
+          </div>
+          <div class="input">
+            <input type="text" id="photo-URL" name="photo-URL" />
+          </div>
+          <div class="label">
+            <label for="notes">Notes</label>
+          </div>
+          <div class="notes">
+            <textarea id="notes" rows="8"></textarea>
+          </div>
+          <div class="button">
+            <button type="submit">save</button>
+          </div>
+        </form>
+      </div>
       <div data-view="entries" class="hidden"></div>
     </main>
     <script src="js/data.js"></script>
