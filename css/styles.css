@@ -2,38 +2,25 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+body {
+  background-color: rgb(240, 240, 240);
+}
+
+header {
+  background-color: rgb(86, 43, 128);
+}
+
 h3 {
   color: white;
   font-weight: lighter;
-  padding: 0.75rem 1rem;
-  margin: 0;
-}
-
-h1 {
-  padding: 0 1rem;
-  margin: 1rem auto;
 }
 
 img {
   width: 100%;
-  padding: 0 1rem;
-}
-
-.column-half,
-.column-full {
-  background-color: rgb(240, 240, 240);
-}
-
-.column-full h3 {
-  background-color: rgb(86, 43, 128);
+  padding-bottom: 1rem;
 }
 
 /* entry form */
-
-form {
-  background-color: rgb(240, 240, 240);
-  padding: 0 1rem;
-}
 
 label {
   font-weight: bold;
@@ -65,12 +52,12 @@ button {
   font-size: 0.75rem;
 }
 
-.label {
-  padding-top: 1.25rem;
-  padding-bottom: 0.5rem;
+.input {
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
 }
 
 .button {
   text-align: right;
-  padding: 0.75rem 0;
+  padding-bottom: 1rem;
 }
