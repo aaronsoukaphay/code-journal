@@ -6,3 +6,25 @@ $photoURL.addEventListener('input', handleInput);
 function handleInput(event) {
   $img.setAttribute('src', event.target.value);
 }
+
+const $form = document.querySelector('form');
+
+$form.addEventListener('submit', handleSubmit);
+
+function handleSubmit(event) {
+  event.preventDefault();
+  const formInfo = {
+    title: $form.elements.title.value,
+    photoURL: $form.elements.photoURL.value,
+    notes: $form.elements.notes.value,
+    entryId: data.nextEntryId,
+  };
+  // console.log(formInfo)
+  data.entries.unshift(formInfo);
+  formInfo.photoURL.value = $img.setAttribute(
+    'src',
+    'images/placeholder-image-square.jpg'
+  );
+  data.nextEntryId++;
+  $form.reset();
+}

@@ -6,3 +6,5 @@ let data = {
   editing: null,
   nextEntryId: 1,
 };
+
+// console.log(data.entries)

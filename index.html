@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow&family=Proza+Libre&display=swap"
+      rel="stylesheet" />
   </head>
   <body>
     <header>
@@ -25,53 +30,51 @@
         </div>
       </div>
     </header>
-    <div class="container">
-      <div class="row">
-        <div class="column-full">
-          <h1>New Entry</h1>
-        </div>
-      </div>
-      <div class="row">
-        <div class="column-half">
-          <img
-            src="images/placeholder-image-square.jpg"
-            alt="placeholder-image-square" />
-        </div>
-        <div class="column-half">
-          <form>
-            <div class="label">
-              <label for="title">Title</label>
-            </div>
-            <div class="input">
-              <input required type="text" id="title" name="title" />
-            </div>
-            <div class="label">
-              <label for="photo-URL">Photo URL</label>
-            </div>
-            <div class="input">
-              <input required type="text" id="photo-URL" name="photo-URL" />
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
     <main class="container">
       <div data-view="entry-form">
-        <div class="row">
-          <div class="column-full">
-            <form>
+        <form>
+          <div class="row">
+            <div class="column-full">
+              <h1>New Entry</h1>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="column-full column-half">
+              <img
+                src="images/placeholder-image-square.jpg"
+                alt="placeholder-image-square" />
+            </div>
+            <div class="column-full column-half">
+              <div class="label">
+                <label for="title">Title</label>
+              </div>
+              <div class="input">
+                <input required type="text" id="title" name="title" />
+              </div>
+              <div class="label">
+                <label for="photo-URL">Photo URL</label>
+              </div>
+              <div class="input">
+                <input required type="text" id="photo-URL" name="photoURL" />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="column-full">
               <div class="label">
                 <label for="notes">Notes</label>
               </div>
               <div class="input">
-                <textarea required id="notes" rows="8"></textarea>
+                <textarea required id="notes" name="notes" rows="8"></textarea>
               </div>
               <div class="button">
                 <button type="submit">save</button>
               </div>
-            </form>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
       <div data-view="entries" class="hidden"></div>
     </main>
