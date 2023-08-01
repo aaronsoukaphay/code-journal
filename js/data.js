@@ -7,8 +7,6 @@ let data = {
   nextEntryId: 1,
 };
 
-// console.log(data.entries)
-
 window.addEventListener('beforeunload', handleUnload);
 
 function handleUnload() {

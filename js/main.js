@@ -19,7 +19,6 @@ function handleSubmit(event) {
     notes: $form.elements.notes.value,
     entryId: data.nextEntryId,
   };
-  // console.log(formInfo)
   data.entries.unshift(formInfo);
   formInfo.photoURL.value = $img.setAttribute(
     'src',
