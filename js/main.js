@@ -20,10 +20,7 @@ function handleSubmit(event) {
     entryId: data.nextEntryId,
   };
   data.entries.unshift(formInfo);
-  formInfo.photoURL.value = $img.setAttribute(
-    'src',
-    'images/placeholder-image-square.jpg'
-  );
+  $img.setAttribute('src', 'images/placeholder-image-square.jpg');
   data.nextEntryId++;
   $form.reset();
 }
