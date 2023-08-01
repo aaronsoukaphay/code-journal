@@ -61,3 +61,7 @@ button {
 ul {
   list-style-type: none;
 }
+
+h4 {
+  font-weight: 600;
+}
