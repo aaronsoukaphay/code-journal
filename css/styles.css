@@ -8,10 +8,11 @@ body {
 
 header {
   background-color: rgb(86, 43, 128);
+  color: white;
 }
 
 h3 {
-  color: white;
+  padding-right: 1rem;
 }
 
 img {
@@ -46,6 +47,7 @@ button {
   border: none;
   padding: 0.35rem 0.75rem;
   font-size: 0.75rem;
+  align-items: right;
 }
 
 .input {
@@ -64,4 +66,20 @@ ul {
 
 h4 {
   font-weight: 600;
+}
+
+.entries-header {
+  display: flex;
+  align-items: center;
+}
+
+.entries-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.no-entries {
+  display: flex;
+  justify-content: center;
 }
