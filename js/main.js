@@ -55,6 +55,13 @@ function renderEntry(entry) {
   return $li;
 }
 
-renderEntry();
+const $ul = document.querySelector('ul');
 
-// console.log(renderEntry(data.entries[0]))
+document.addEventListener('DOMContentLoaded', handleDOMContentLoaded);
+
+function handleDOMContentLoaded(event) {
+  for (let i = 0; i < data.entries.length; i++) {
+    const entryObject = renderEntry(data.entries[i]);
+    $ul.appendChild(entryObject);
+  }
+}
