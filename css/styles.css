@@ -17,6 +17,7 @@ h3 {
 
 img {
   width: 100%;
+  margin-bottom: 1rem;
 }
 
 label {
@@ -40,7 +41,7 @@ textarea {
 }
 
 button,
-a {
+.entry-form-tab {
   background-color: rgb(86, 43, 128);
   color: white;
   text-transform: uppercase;
@@ -66,6 +67,10 @@ ul {
   padding: 0;
 }
 
+li {
+  margin-bottom: 1.5rem;
+}
+
 h4 {
   font-weight: 600;
 }
@@ -84,4 +89,13 @@ h4 {
 .no-entries {
   display: flex;
   justify-content: center;
+}
+
+.entries-tab {
+  color: white;
+  text-decoration: none;
+}
+
+.entry-form-tab {
+  text-decoration: none;
 }
