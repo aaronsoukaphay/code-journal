@@ -20,6 +20,9 @@ function handleSubmit(event) {
     entryId: data.nextEntryId,
   };
   data.entries.unshift(formInfo);
+  $ul.prepend(renderEntry(formInfo));
+  viewSwap('entries');
+  toggleNoEntries();
   $img.setAttribute('src', 'images/placeholder-image-square.jpg');
   data.nextEntryId++;
   $form.reset();
@@ -69,32 +72,33 @@ function handleDOMContentLoaded(event) {
 const $noEntries = document.querySelector('.no-entries');
 
 function toggleNoEntries() {
-  if (data.entries.length >= 0) {
+  if (data.entries.length > 0) {
     $noEntries.className = 'hidden';
   } else {
-    $noEntries.className = 'column-full ' + 'no-entries';
+    $noEntries.className = 'column-full no-entries';
   }
 }
-
-toggleNoEntries();
 
 const $entries = document.querySelector('.entries');
 const $entryForm = document.querySelector('.entry-form');
 
-function viewSwap(event) {
-  if (event.target.matches('.entries-tab')) {
-    $entryForm.className = 'hidden';
-    $entries.className = 'entries';
-    data.view = 'entries';
-  } else if (event.target.matches('.entry-form-tab')) {
-    $entries.className = 'hidden';
+function viewSwap(viewName) {
+  if (viewName === 'entry-form') {
     $entryForm.className = 'entry-form';
-    data.view = 'entry-form';
+    $entries.className = 'entries hidden';
+  } else {
+    $entries.className = 'entries';
+    $entryForm.className = 'entry-form hidden';
   }
+  data.view = viewName;
 }
 
 const $entriesTab = document.querySelector('.entries-tab');
 const $entryFormTab = document.querySelector('.entry-form-tab');
 
-$entriesTab.addEventListener('click', viewSwap);
-$entryFormTab.addEventListener('click', viewSwap);
+$entriesTab.addEventListener('click', function () {
+  viewSwap('entries');
+});
+$entryFormTab.addEventListener('click', function () {
+  viewSwap('entry-form');
+});
