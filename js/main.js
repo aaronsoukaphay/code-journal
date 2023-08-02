@@ -67,6 +67,12 @@ function handleDOMContentLoaded(event) {
     const entryObject = renderEntry(data.entries[i]);
     $ul.appendChild(entryObject);
   }
+  if (data.view === 'entry-form') {
+    viewSwap('entry-form');
+  } else {
+    viewSwap('entries');
+  }
+  toggleNoEntries();
 }
 
 const $noEntries = document.querySelector('.no-entries');
