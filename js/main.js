@@ -30,6 +30,7 @@ function handleSubmit(event) {
 
 function renderEntry(entry) {
   const $li = document.createElement('li');
+  $li.setAttribute('data-entry-id', entry.entryId);
 
   const $divRow1 = document.createElement('div');
   $divRow1.setAttribute('class', 'row');
