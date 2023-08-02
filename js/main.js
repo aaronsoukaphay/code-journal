@@ -93,4 +93,6 @@ function viewSwap(view) {
   }
 }
 
-viewSwap();
+const $entriesTab = document.querySelector('.entries-tab');
+
+$entriesTab.addEventListener('click', viewSwap);
