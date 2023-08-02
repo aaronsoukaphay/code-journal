@@ -98,3 +98,13 @@ h4 {
 .entry-form-tab {
   text-decoration: none;
 }
+
+.row-pencil {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fa-pencil {
+  color: rgb(86, 43, 128);
+}

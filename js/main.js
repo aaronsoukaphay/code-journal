@@ -31,13 +31,13 @@ function handleSubmit(event) {
 function renderEntry(entry) {
   const $li = document.createElement('li');
 
-  const $divRow = document.createElement('div');
-  $divRow.setAttribute('class', 'row');
-  $li.appendChild($divRow);
+  const $divRow1 = document.createElement('div');
+  $divRow1.setAttribute('class', 'row');
+  $li.appendChild($divRow1);
 
   const $divColumn1 = document.createElement('div');
   $divColumn1.setAttribute('class', 'column-half');
-  $divRow.appendChild($divColumn1);
+  $divRow1.appendChild($divColumn1);
 
   const $img = document.createElement('img');
   $img.setAttribute('src', entry.photoURL);
@@ -45,11 +45,19 @@ function renderEntry(entry) {
 
   const $divColumn2 = document.createElement('div');
   $divColumn2.setAttribute('class', 'column-half');
-  $divRow.appendChild($divColumn2);
+  $divRow1.appendChild($divColumn2);
+
+  const $divRow2 = document.createElement('div');
+  $divRow2.setAttribute('class', 'row-pencil');
+  $divColumn2.appendChild($divRow2);
 
   const $h4 = document.createElement('h4');
   $h4.textContent = entry.title;
-  $divColumn2.appendChild($h4);
+  $divRow2.appendChild($h4);
+
+  const $pencil = document.createElement('i');
+  $pencil.setAttribute('class', 'fa fa-pencil fa-lg');
+  $divRow2.appendChild($pencil);
 
   const $p = document.createElement('p');
   $p.textContent = entry.notes;
