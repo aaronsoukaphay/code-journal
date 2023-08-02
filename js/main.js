@@ -20,7 +20,87 @@ function handleSubmit(event) {
     entryId: data.nextEntryId,
   };
   data.entries.unshift(formInfo);
+  $ul.prepend(renderEntry(formInfo));
+  viewSwap('entries');
+  toggleNoEntries();
   $img.setAttribute('src', 'images/placeholder-image-square.jpg');
   data.nextEntryId++;
   $form.reset();
 }
+
+function renderEntry(entry) {
+  const $li = document.createElement('li');
+
+  const $divRow = document.createElement('div');
+  $divRow.setAttribute('class', 'row');
+  $li.appendChild($divRow);
+
+  const $divColumn1 = document.createElement('div');
+  $divColumn1.setAttribute('class', 'column-half');
+  $divRow.appendChild($divColumn1);
+
+  const $img = document.createElement('img');
+  $img.setAttribute('src', entry.photoURL);
+  $divColumn1.appendChild($img);
+
+  const $divColumn2 = document.createElement('div');
+  $divColumn2.setAttribute('class', 'column-half');
+  $divRow.appendChild($divColumn2);
+
+  const $h4 = document.createElement('h4');
+  $h4.textContent = entry.title;
+  $divColumn2.appendChild($h4);
+
+  const $p = document.createElement('p');
+  $p.textContent = entry.notes;
+  $divColumn2.appendChild($p);
+
+  return $li;
+}
+
+const $ul = document.querySelector('ul');
+
+document.addEventListener('DOMContentLoaded', handleDOMContentLoaded);
+
+function handleDOMContentLoaded(event) {
+  for (let i = 0; i < data.entries.length; i++) {
+    const entryObject = renderEntry(data.entries[i]);
+    $ul.appendChild(entryObject);
+  }
+  viewSwap(data.view);
+  toggleNoEntries();
+}
+
+const $noEntries = document.querySelector('.no-entries');
+
+function toggleNoEntries() {
+  if (data.entries.length > 0) {
+    $noEntries.className = 'hidden';
+  } else {
+    $noEntries.className = 'column-full no-entries';
+  }
+}
+
+const $entries = document.querySelector('.entries');
+const $entryForm = document.querySelector('.entry-form');
+
+function viewSwap(viewName) {
+  if (viewName === 'entry-form') {
+    $entryForm.className = 'entry-form';
+    $entries.className = 'entries hidden';
+  } else {
+    $entries.className = 'entries';
+    $entryForm.className = 'entry-form hidden';
+  }
+  data.view = viewName;
+}
+
+const $entriesTab = document.querySelector('.entries-tab');
+const $entryFormTab = document.querySelector('.entry-form-tab');
+
+$entriesTab.addEventListener('click', function () {
+  viewSwap('entries');
+});
+$entryFormTab.addEventListener('click', function () {
+  viewSwap('entry-form');
+});
