@@ -81,13 +81,15 @@ toggleNoEntries();
 const $entries = document.querySelector('.entries');
 const $entryForm = document.querySelector('.entry-form');
 
-function viewSwap(view) {
-  if (view === 'entry-form') {
-    $entries.className = 'hidden';
-    data.view = view;
-  } else if (view === 'entries') {
+function viewSwap(event) {
+  if (event.target.matches('.entries-tab')) {
     $entryForm.className = 'hidden';
-    data.view = view;
+    $entries.className = 'entries';
+    data.view = 'entries';
+  } else if (event.target.matches('.entry-form-tab')) {
+    $entries.className = 'hidden';
+    $entryForm.className = 'entry-form';
+    data.view = 'entry-form';
   }
 }
 
