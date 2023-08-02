@@ -65,3 +65,15 @@ function handleDOMContentLoaded(event) {
     $ul.appendChild(entryObject);
   }
 }
+
+const $noEntries = document.querySelector('.no-entries');
+
+function toggleNoEntries() {
+  if (data.entries.length >= 0) {
+    $noEntries.className = 'hidden';
+  } else {
+    $noEntries.className = 'column-full ' + 'no-entries';
+  }
+}
+
+toggleNoEntries();
