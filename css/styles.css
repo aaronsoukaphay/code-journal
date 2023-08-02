@@ -39,7 +39,8 @@ textarea {
   border-width: 0.01rem;
 }
 
-button {
+button,
+a {
   background-color: rgb(86, 43, 128);
   color: white;
   text-transform: uppercase;
