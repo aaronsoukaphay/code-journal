@@ -12,20 +12,39 @@ const $form = document.querySelector('form');
 $form.addEventListener('submit', handleSubmit);
 
 function handleSubmit(event) {
-  event.preventDefault();
   const formInfo = {
     title: $form.elements.title.value,
     photoURL: $form.elements.photoURL.value,
     notes: $form.elements.notes.value,
     entryId: data.nextEntryId,
   };
-  data.entries.unshift(formInfo);
-  $ul.prepend(renderEntry(formInfo));
+  if (data.editing === null) {
+    event.preventDefault();
+    data.entries.unshift(formInfo);
+    $ul.prepend(renderEntry(formInfo));
+    $img.setAttribute('src', 'images/placeholder-image-square.jpg');
+    data.nextEntryId++;
+    toggleNoEntries();
+    $form.reset();
+  } else {
+    formInfo.entryId = data.editing.entryId;
+    for (let i = 0; i < data.entries.length; i++) {
+      if (formInfo.entryId === data.entries[i].entryId) {
+        data.entries[i] = formInfo;
+        renderEntry(data.entries[i]);
+        const $li = document.querySelectorAll('li');
+        for (let j = 0; j < $li.length; j++) {
+          if (
+            $li[j].getAttribute('data-entry-id') ===
+            renderEntry(data.entries[i]).getAttribute('data-entry-id')
+          ) {
+            $li[j] = renderEntry(data.entries[i]);
+          }
+        }
+      }
+    }
+  }
   viewSwap('entries');
-  toggleNoEntries();
-  $img.setAttribute('src', 'images/placeholder-image-square.jpg');
-  data.nextEntryId++;
-  $form.reset();
 }
 
 function renderEntry(entry) {
