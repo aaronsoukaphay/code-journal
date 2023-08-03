@@ -68,6 +68,26 @@ function renderEntry(entry) {
 }
 
 const $ul = document.querySelector('ul');
+$ul.addEventListener('click', clickPencil);
+const $title = document.querySelector('#title');
+const $notes = document.querySelector('#notes');
+
+function clickPencil(event) {
+  if (event.target.getAttribute('class') === 'fa fa-pencil fa-lg') {
+    viewSwap('entry-form');
+    for (let i = 0; i < data.entries.length; i++) {
+      if (
+        JSON.stringify(data.entries[i].entryId) ===
+        event.target.closest('li').getAttribute('data-entry-id')
+      ) {
+        data.editing = data.entries[i];
+      }
+    }
+    $title.setAttribute('value', data.editing.title);
+    $photoURL.setAttribute('value', data.editing.photoURL);
+    $notes.textContent = data.editing.notes;
+  }
+}
 
 document.addEventListener('DOMContentLoaded', handleDOMContentLoaded);
 
