@@ -25,7 +25,6 @@ function handleSubmit(event) {
     $img.setAttribute('src', 'images/placeholder-image-square.jpg');
     data.nextEntryId++;
     toggleNoEntries();
-    viewSwap('entries');
     $form.reset();
   } else {
     formInfo.entryId = data.editing.entryId;
@@ -47,6 +46,7 @@ function handleSubmit(event) {
     $h1.textContent = 'New Entry';
     data.editing = null;
   }
+  viewSwap('entries');
 }
 
 function renderEntry(entry) {
@@ -107,6 +107,7 @@ function clickPencil(event) {
     }
     $title.setAttribute('value', data.editing.title);
     $photoURL.setAttribute('value', data.editing.photoURL);
+    $img.setAttribute('src', data.editing.photoURL);
     $notes.textContent = data.editing.notes;
   }
   $h1.textContent = 'Edit Entry';
