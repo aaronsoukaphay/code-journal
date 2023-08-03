@@ -25,6 +25,7 @@ function handleSubmit(event) {
     $img.setAttribute('src', 'images/placeholder-image-square.jpg');
     data.nextEntryId++;
     toggleNoEntries();
+    viewSwap('entries');
     $form.reset();
   } else {
     formInfo.entryId = data.editing.entryId;
@@ -43,8 +44,9 @@ function handleSubmit(event) {
         }
       }
     }
+    $h1.textContent = 'New Entry';
+    data.editing = null;
   }
-  viewSwap('entries');
 }
 
 function renderEntry(entry) {
