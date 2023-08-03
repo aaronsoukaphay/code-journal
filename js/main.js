@@ -90,6 +90,7 @@ function renderEntry(entry) {
 
 const $ul = document.querySelector('ul');
 $ul.addEventListener('click', clickPencil);
+
 const $title = document.querySelector('#title');
 const $notes = document.querySelector('#notes');
 const $h1 = document.querySelector('h1');
@@ -153,7 +154,13 @@ const $entryFormTab = document.querySelector('.entry-form-tab');
 
 $entriesTab.addEventListener('click', function () {
   viewSwap('entries');
+  $title.setAttribute('value', '');
+  $photoURL.setAttribute('value', '');
+  $img.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $notes.textContent = '';
+  $h1.textContent = 'New Entry';
 });
+
 $entryFormTab.addEventListener('click', function () {
   viewSwap('entry-form');
 });
