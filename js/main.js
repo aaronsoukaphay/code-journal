@@ -71,6 +71,7 @@ const $ul = document.querySelector('ul');
 $ul.addEventListener('click', clickPencil);
 const $title = document.querySelector('#title');
 const $notes = document.querySelector('#notes');
+const $h1 = document.querySelector('h1');
 
 function clickPencil(event) {
   if (event.target.getAttribute('class') === 'fa fa-pencil fa-lg') {
@@ -87,6 +88,7 @@ function clickPencil(event) {
     $photoURL.setAttribute('value', data.editing.photoURL);
     $notes.textContent = data.editing.notes;
   }
+  $h1.textContent = 'Edit Entry';
 }
 
 document.addEventListener('DOMContentLoaded', handleDOMContentLoaded);
