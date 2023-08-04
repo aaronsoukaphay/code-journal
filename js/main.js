@@ -22,6 +22,9 @@ function handleSubmit(event) {
     event.preventDefault();
     data.entries.unshift(formInfo);
     $ul.prepend(renderEntry(formInfo));
+    $img.setAttribute('src', 'images/placeholder-image-square.jpg');
+    data.nextEntryId++;
+    toggleNoEntries();
   } else {
     formInfo.entryId = data.editing.entryId;
     for (let i = 0; i < data.entries.length; i++) {
@@ -38,9 +41,6 @@ function handleSubmit(event) {
     $h1.textContent = 'New Entry';
     data.editing = null;
   }
-  $img.setAttribute('src', 'images/placeholder-image-square.jpg');
-  data.nextEntryId++;
-  toggleNoEntries();
   $form.reset();
   viewSwap('entries');
 }
@@ -96,10 +96,7 @@ function clickPencil(event) {
     for (let i = 0; i < data.entries.length; i++) {
       if (
         data.entries[i].entryId ===
-        Number.parseInt(
-          event.target.closest('li').getAttribute('data-entry-id'),
-          2
-        )
+        Number(event.target.closest('li').getAttribute('data-entry-id'))
       ) {
         data.editing = data.entries[i];
       }
