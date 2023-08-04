@@ -22,22 +22,14 @@ function handleSubmit(event) {
     event.preventDefault();
     data.entries.unshift(formInfo);
     $ul.prepend(renderEntry(formInfo));
-    $img.setAttribute('src', 'images/placeholder-image-square.jpg');
-    data.nextEntryId++;
-    toggleNoEntries();
-    $form.reset();
   } else {
     formInfo.entryId = data.editing.entryId;
     for (let i = 0; i < data.entries.length; i++) {
       if (formInfo.entryId === data.entries[i].entryId) {
         data.entries[i] = formInfo;
-        renderEntry(data.entries[i]);
         const $li = document.querySelectorAll('li');
         for (let j = 0; j < $li.length; j++) {
-          if (
-            $li[j].getAttribute('data-entry-id') ===
-            renderEntry(data.entries[i]).getAttribute('data-entry-id')
-          ) {
+          if ($li[j].getAttribute('data-entry-id') === data.editing.entryId) {
             $li[j] = renderEntry(data.entries[i]);
           }
         }
@@ -46,6 +38,10 @@ function handleSubmit(event) {
     $h1.textContent = 'New Entry';
     data.editing = null;
   }
+  $img.setAttribute('src', 'images/placeholder-image-square.jpg');
+  data.nextEntryId++;
+  toggleNoEntries();
+  $form.reset();
   viewSwap('entries');
 }
 
@@ -97,11 +93,13 @@ const $h1 = document.querySelector('h1');
 
 function clickPencil(event) {
   if (event.target.getAttribute('class') === 'fa fa-pencil fa-lg') {
-    viewSwap('entry-form');
     for (let i = 0; i < data.entries.length; i++) {
       if (
-        JSON.stringify(data.entries[i].entryId) ===
-        event.target.closest('li').getAttribute('data-entry-id')
+        data.entries[i].entryId ===
+        Number.parseInt(
+          event.target.closest('li').getAttribute('data-entry-id'),
+          2
+        )
       ) {
         data.editing = data.entries[i];
       }
@@ -112,6 +110,7 @@ function clickPencil(event) {
     $notes.textContent = data.editing.notes;
   }
   $h1.textContent = 'Edit Entry';
+  viewSwap('entry-form');
 }
 
 document.addEventListener('DOMContentLoaded', handleDOMContentLoaded);
