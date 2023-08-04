@@ -105,9 +105,9 @@ function clickPencil(event) {
     $photoURL.setAttribute('value', data.editing.photoURL);
     $img.setAttribute('src', data.editing.photoURL);
     $notes.textContent = data.editing.notes;
+    viewSwap('entry-form');
   }
   $h1.textContent = 'Edit Entry';
-  viewSwap('entry-form');
 }
 
 document.addEventListener('DOMContentLoaded', handleDOMContentLoaded);
