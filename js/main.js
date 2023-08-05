@@ -12,32 +12,50 @@ const $form = document.querySelector('form');
 $form.addEventListener('submit', handleSubmit);
 
 function handleSubmit(event) {
-  event.preventDefault();
   const formInfo = {
     title: $form.elements.title.value,
     photoURL: $form.elements.photoURL.value,
     notes: $form.elements.notes.value,
     entryId: data.nextEntryId,
   };
-  data.entries.unshift(formInfo);
-  $ul.prepend(renderEntry(formInfo));
-  viewSwap('entries');
-  toggleNoEntries();
-  $img.setAttribute('src', 'images/placeholder-image-square.jpg');
-  data.nextEntryId++;
+  if (data.editing === null) {
+    event.preventDefault();
+    data.entries.unshift(formInfo);
+    $ul.prepend(renderEntry(formInfo));
+    $img.setAttribute('src', 'images/placeholder-image-square.jpg');
+    data.nextEntryId++;
+    toggleNoEntries();
+  } else {
+    formInfo.entryId = data.editing.entryId;
+    for (let i = 0; i < data.entries.length; i++) {
+      if (formInfo.entryId === data.entries[i].entryId) {
+        data.entries[i] = formInfo;
+        const $li = document.querySelectorAll('li');
+        for (let j = 0; j < $li.length; j++) {
+          if ($li[j].getAttribute('data-entry-id') === data.editing.entryId) {
+            $li[j] = renderEntry(data.entries[i]);
+          }
+        }
+      }
+    }
+    $h1.textContent = 'New Entry';
+    data.editing = null;
+  }
   $form.reset();
+  viewSwap('entries');
 }
 
 function renderEntry(entry) {
   const $li = document.createElement('li');
+  $li.setAttribute('data-entry-id', entry.entryId);
 
-  const $divRow = document.createElement('div');
-  $divRow.setAttribute('class', 'row');
-  $li.appendChild($divRow);
+  const $divRow1 = document.createElement('div');
+  $divRow1.setAttribute('class', 'row');
+  $li.appendChild($divRow1);
 
   const $divColumn1 = document.createElement('div');
   $divColumn1.setAttribute('class', 'column-half');
-  $divRow.appendChild($divColumn1);
+  $divRow1.appendChild($divColumn1);
 
   const $img = document.createElement('img');
   $img.setAttribute('src', entry.photoURL);
@@ -45,11 +63,19 @@ function renderEntry(entry) {
 
   const $divColumn2 = document.createElement('div');
   $divColumn2.setAttribute('class', 'column-half');
-  $divRow.appendChild($divColumn2);
+  $divRow1.appendChild($divColumn2);
+
+  const $divRow2 = document.createElement('div');
+  $divRow2.setAttribute('class', 'row-pencil');
+  $divColumn2.appendChild($divRow2);
 
   const $h4 = document.createElement('h4');
   $h4.textContent = entry.title;
-  $divColumn2.appendChild($h4);
+  $divRow2.appendChild($h4);
+
+  const $pencil = document.createElement('i');
+  $pencil.setAttribute('class', 'fa fa-pencil fa-lg');
+  $divRow2.appendChild($pencil);
 
   const $p = document.createElement('p');
   $p.textContent = entry.notes;
@@ -59,6 +85,30 @@ function renderEntry(entry) {
 }
 
 const $ul = document.querySelector('ul');
+$ul.addEventListener('click', clickPencil);
+
+const $title = document.querySelector('#title');
+const $notes = document.querySelector('#notes');
+const $h1 = document.querySelector('h1');
+
+function clickPencil(event) {
+  if (event.target.getAttribute('class') === 'fa fa-pencil fa-lg') {
+    for (let i = 0; i < data.entries.length; i++) {
+      if (
+        data.entries[i].entryId ===
+        Number(event.target.closest('li').getAttribute('data-entry-id'))
+      ) {
+        data.editing = data.entries[i];
+      }
+    }
+    $title.setAttribute('value', data.editing.title);
+    $photoURL.setAttribute('value', data.editing.photoURL);
+    $img.setAttribute('src', data.editing.photoURL);
+    $notes.textContent = data.editing.notes;
+    viewSwap('entry-form');
+  }
+  $h1.textContent = 'Edit Entry';
+}
 
 document.addEventListener('DOMContentLoaded', handleDOMContentLoaded);
 
@@ -100,7 +150,13 @@ const $entryFormTab = document.querySelector('.entry-form-tab');
 
 $entriesTab.addEventListener('click', function () {
   viewSwap('entries');
+  $title.setAttribute('value', '');
+  $photoURL.setAttribute('value', '');
+  $img.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $notes.textContent = '';
+  $h1.textContent = 'New Entry';
 });
+
 $entryFormTab.addEventListener('click', function () {
   viewSwap('entry-form');
 });
