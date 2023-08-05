@@ -85,6 +85,7 @@ function renderEntry(entry) {
 }
 
 const $ul = document.querySelector('ul');
+
 $ul.addEventListener('click', clickPencil);
 
 const $title = document.querySelector('#title');
@@ -107,9 +108,17 @@ function clickPencil(event) {
     $img.setAttribute('src', data.editing.photoURL);
     $notes.textContent = data.editing.notes;
     $deleteEntryBtn.className = 'delete-entry';
+    $h1.textContent = 'Edit Entry';
     viewSwap('entry-form');
   }
-  $h1.textContent = 'Edit Entry';
+}
+
+const $modalContainer = document.querySelector('.modal-container');
+
+$deleteEntryBtn.addEventListener('click', handleDeleteEntry);
+
+function handleDeleteEntry(event) {
+  $modalContainer.className = 'modal-container';
 }
 
 document.addEventListener('DOMContentLoaded', handleDOMContentLoaded);
@@ -151,12 +160,13 @@ const $entriesTab = document.querySelector('.entries-tab');
 const $entryFormTab = document.querySelector('.entry-form-tab');
 
 $entriesTab.addEventListener('click', function () {
-  viewSwap('entries');
   $title.setAttribute('value', '');
   $photoURL.setAttribute('value', '');
   $img.setAttribute('src', 'images/placeholder-image-square.jpg');
   $notes.textContent = '';
   $h1.textContent = 'New Entry';
+  $deleteEntryBtn.className = 'delete-entry no-visibility';
+  viewSwap('entries');
 });
 
 $entryFormTab.addEventListener('click', function () {
