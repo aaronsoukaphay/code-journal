@@ -121,6 +121,14 @@ function handleDeleteEntry(event) {
   $modalContainer.className = 'modal-container';
 }
 
+const $cancel = document.querySelector('#cancel');
+
+$cancel.addEventListener('click', handleCancel);
+
+function handleCancel(event) {
+  $modalContainer.className = 'modal-container hidden';
+}
+
 document.addEventListener('DOMContentLoaded', handleDOMContentLoaded);
 
 function handleDOMContentLoaded(event) {
