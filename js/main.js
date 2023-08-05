@@ -196,5 +196,10 @@ $entriesTab.addEventListener('click', function () {
 });
 
 $entryFormTab.addEventListener('click', function () {
+  $title.setAttribute('value', '');
+  $photoURL.setAttribute('value', '');
+  $img.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $notes.textContent = '';
+  $h1.textContent = 'New Entry';
   viewSwap('entry-form');
 });
