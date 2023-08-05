@@ -90,6 +90,7 @@ $ul.addEventListener('click', clickPencil);
 const $title = document.querySelector('#title');
 const $notes = document.querySelector('#notes');
 const $h1 = document.querySelector('h1');
+const $deleteEntryBtn = document.querySelector('.delete-entry');
 
 function clickPencil(event) {
   if (event.target.getAttribute('class') === 'fa fa-pencil fa-lg') {
@@ -105,6 +106,7 @@ function clickPencil(event) {
     $photoURL.setAttribute('value', data.editing.photoURL);
     $img.setAttribute('src', data.editing.photoURL);
     $notes.textContent = data.editing.notes;
+    $deleteEntryBtn.className = 'delete-entry';
     viewSwap('entry-form');
   }
   $h1.textContent = 'Edit Entry';

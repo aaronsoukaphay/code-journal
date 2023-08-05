@@ -57,7 +57,8 @@ button,
 }
 
 .button {
-  text-align: right;
+  display: flex;
+  justify-content: space-between;
   padding-bottom: 1rem;
 }
 
@@ -107,4 +108,13 @@ h4 {
 
 .fa-pencil {
   color: rgb(86, 43, 128);
+}
+
+.delete-entry {
+  color: red;
+  font-size: small;
+}
+
+.no-visibility {
+  visibility: hidden;
 }
