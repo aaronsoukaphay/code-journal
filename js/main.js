@@ -129,6 +129,25 @@ function handleCancel(event) {
   $modalContainer.className = 'modal-container hidden';
 }
 
+const $confirm = document.querySelector('#confirm');
+
+$confirm.addEventListener('click', handleConfirm);
+
+function handleConfirm(event) {
+  for (let i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].entryId === data.editing.entryId) {
+      data.entries.splice(i, 1);
+    }
+    // if (data.entries[i].entryId === Number(event.target.closest('li').getAttribute('data-entry-id'))
+    // ) {
+    //   event.target.closest('li').remove();
+    // }
+  }
+  toggleNoEntries();
+  $modalContainer.className = 'modal-container hidden';
+  viewSwap('entries');
+}
+
 document.addEventListener('DOMContentLoaded', handleDOMContentLoaded);
 
 function handleDOMContentLoaded(event) {
