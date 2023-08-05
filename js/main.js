@@ -130,7 +130,7 @@ function handleCancel(event) {
 }
 
 const $confirm = document.querySelector('#confirm');
-const $li = document.querySelectorAll('li');
+const childrenUl = $ul.childNodes;
 
 $confirm.addEventListener('click', handleConfirm);
 
@@ -138,15 +138,12 @@ function handleConfirm(event) {
   for (let i = 0; i < data.entries.length; i++) {
     if (data.entries[i].entryId === data.editing.entryId) {
       data.entries.splice(i, 1);
-    }
-  }
-  for (let j = 0; j < $li.length; j++) {
-    if ($li[j].getAttribute('data-entry-id') === data.editing.entryId) {
-      $li[j].remove();
+      childrenUl[i].remove();
     }
   }
   toggleNoEntries();
   $modalContainer.className = 'modal-container hidden';
+  data.editing = null;
   viewSwap('entries');
 }
 
