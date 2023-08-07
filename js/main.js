@@ -85,11 +85,13 @@ function renderEntry(entry) {
 }
 
 const $ul = document.querySelector('ul');
+
 $ul.addEventListener('click', clickPencil);
 
 const $title = document.querySelector('#title');
 const $notes = document.querySelector('#notes');
 const $h1 = document.querySelector('h1');
+const $deleteEntryBtn = document.querySelector('.delete-entry');
 
 function clickPencil(event) {
   if (event.target.getAttribute('class') === 'fa fa-pencil fa-lg') {
@@ -105,9 +107,44 @@ function clickPencil(event) {
     $photoURL.setAttribute('value', data.editing.photoURL);
     $img.setAttribute('src', data.editing.photoURL);
     $notes.textContent = data.editing.notes;
+    $deleteEntryBtn.className = 'delete-entry';
+    $h1.textContent = 'Edit Entry';
     viewSwap('entry-form');
   }
-  $h1.textContent = 'Edit Entry';
+}
+
+const $modalContainer = document.querySelector('.modal-container');
+
+$deleteEntryBtn.addEventListener('click', handleDeleteEntry);
+
+function handleDeleteEntry(event) {
+  $modalContainer.className = 'modal-container';
+}
+
+const $cancel = document.querySelector('#cancel');
+
+$cancel.addEventListener('click', handleCancel);
+
+function handleCancel(event) {
+  $modalContainer.className = 'modal-container hidden';
+}
+
+const $confirm = document.querySelector('#confirm');
+const childrenUl = $ul.childNodes;
+
+$confirm.addEventListener('click', handleConfirm);
+
+function handleConfirm(event) {
+  for (let i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].entryId === data.editing.entryId) {
+      data.entries.splice(i, 1);
+      childrenUl[i].remove();
+    }
+  }
+  toggleNoEntries();
+  $modalContainer.className = 'modal-container hidden';
+  data.editing = null;
+  viewSwap('entries');
 }
 
 document.addEventListener('DOMContentLoaded', handleDOMContentLoaded);
@@ -149,14 +186,20 @@ const $entriesTab = document.querySelector('.entries-tab');
 const $entryFormTab = document.querySelector('.entry-form-tab');
 
 $entriesTab.addEventListener('click', function () {
-  viewSwap('entries');
   $title.setAttribute('value', '');
   $photoURL.setAttribute('value', '');
   $img.setAttribute('src', 'images/placeholder-image-square.jpg');
   $notes.textContent = '';
   $h1.textContent = 'New Entry';
+  $deleteEntryBtn.className = 'delete-entry no-visibility';
+  viewSwap('entries');
 });
 
 $entryFormTab.addEventListener('click', function () {
+  $title.setAttribute('value', '');
+  $photoURL.setAttribute('value', '');
+  $img.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $notes.textContent = '';
+  $h1.textContent = 'New Entry';
   viewSwap('entry-form');
 });
